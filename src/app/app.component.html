@@ -1,0 +1,56 @@
+<form>
+  <dx-form
+    id="requestForm"
+    [showColonAfterLabel]="true"
+    [showValidationSummary]="true"
+    [labelLocation]="'top'"
+    (onFieldDataChanged)="validateForm()"
+    (onContentReady)="contentReady()"
+  >
+    <dxi-item itemType="group" [colCount]="4">
+      <dxi-item
+        [colSpan]="1"
+        [label]="{ text: 'Support Ticket Type' }"
+        dataField="ticketType"
+        editorType="dxRadioGroup"
+        [editorOptions]="ticketTypeConfig"
+      >
+        <dxi-validation-rule
+          type="required"
+          message="Support Ticket Type is required"
+        ></dxi-validation-rule>
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item itemType="group" [colCount]="4" *ngIf="showSupervisor">
+      <dxi-item itemType="group" [colSpan]="2">
+        <dxi-item
+          dataField="supervisor"
+          editorType="dxTextBox"
+          [editorOptions]="supervisorConfig"
+        >
+          <dxi-validation-rule
+            type="required"
+            message="Supervisor is required"
+          ></dxi-validation-rule>
+        </dxi-item>
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item
+      dataField="description"
+      editorType="dxHtmlEditor"
+      [editorOptions]="htmlEditorConfig"
+    >
+      <dxi-validation-rule
+        type="required"
+        message="Description is required"
+      ></dxi-validation-rule>
+      <dxi-validation-rule
+        type="stringLength"
+        max="4000"
+        message="Description is limited to only 4000 characters"
+      ></dxi-validation-rule>
+    </dxi-item>
+  </dx-form>
+</form>
